@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <title>Ptt search</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <style>
+        .title
+        {
+            width: 400px;
+            padding: 10px;
+        }
+        .box {
+        width: 500px;
+        padding: 5px;
+       
+        }
+        .ellipsis {
+            overflow:hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            white-space: normal;
+            font-size:75%;
+            color:dimgray;
+            margin-bottom:0px;
+            }
+            .time{
+                margin:0px;
+                font-size:75%;
+                color:dimgray;
+            }
+            hr {
+                margin-top: 5px;
+                margin-bottom: 10px;
+                margin-left: 0px;
+                width: 500px;
+                border: 0;
+                border-top: 1px solid #eee;
+            }
+</style>
+    <div style="padding: 100px 100px 30px;">
+        <form class="bs-example bs-example-form" role="form">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <form action="/" method="get" autocomplete="off">
+                            <label for="q"></label> <input class="form-control type="text" name="q" id="q" value="{{q}}">
+                        </form>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">Go!</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <br>
+        <ol>
+            {%for res in response %}
+            <li style="list-style-type: none">
+                <a class ="title" href="{{res._source.url}}"> {{res._source.title}} </a>
+                <div class="box">
+                    <p class="time">看板：{{res._source.topic}}&ensp;&ensp;&ensp;&ensp;時間：{{res._source.time}} </p>
+                    <p class="ellipsis">{{res._source.content}}</p>
+                </div>
+            </li>
+            <hr>
+            {% endfor %}
+        </ol>
+    </div>
+        </body>
+</html>
+
+
+
